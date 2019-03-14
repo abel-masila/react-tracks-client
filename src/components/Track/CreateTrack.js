@@ -1,4 +1,5 @@
 import React from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
 // import Dialog from "@material-ui/core/Dialog";
 // import DialogActions from "@material-ui/core/DialogActions";
 // import DialogContent from "@material-ui/core/DialogContent";
@@ -12,7 +13,6 @@ import React from "react";
 // import AddIcon from "@material-ui/icons/Add";
 // import ClearIcon from "@material-ui/icons/Clear";
 // import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
-// import withStyles from "@material-ui/core/styles/withStyles";
 
 const CreateTrack = ({ classes }) => {
   return <div>CreateTrack</div>;

@@ -1,6 +1,6 @@
 import React from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
 // import Button from "@material-ui/core/Button";
-// import withStyles from "@material-ui/core/styles/withStyles";
 // import Snackbar from "@material-ui/core/Snackbar";
 
 const Error = ({ classes }) => {

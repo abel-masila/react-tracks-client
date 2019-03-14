@@ -1,5 +1,5 @@
 import React from "react";
-// import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const App = ({ classes }) => {
   return <div>App</div>;

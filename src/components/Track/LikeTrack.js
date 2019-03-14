@@ -1,7 +1,7 @@
 import React from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
 // import IconButton from "@material-ui/core/IconButton";
 // import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-// import withStyles from "@material-ui/core/styles/withStyles";
 
 const LikeTrack = ({ classes }) => {
   return <div>LikeTrack</div>;
