@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -19,6 +19,14 @@ import Gavel from '@material-ui/icons/Gavel';
 import VerifiedUserTwoTone from '@material-ui/icons/VerifiedUserTwoTone';
 
 const Register = ({ classes }) => {
+  const [username, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSubmit = async (e, createUser) => {
+    e.preventDefault();
+    const res = await createUser();
+    console.log(res);
+  };
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -26,21 +34,45 @@ const Register = ({ classes }) => {
           <Gavel />
         </Avatar>
         <Typography variant="h5">Register</Typography>
-        <Mutation mutation={REGISTER_USER}>
-          {(loading, error) => {
+        <Mutation
+          mutation={REGISTER_USER}
+          variables={{
+            username,
+            email,
+            password
+          }}
+        >
+          {(createUser, { data, loading, error }) => {
             return (
-              <form className={classes.form}>
+              <form
+                className={classes.form}
+                onSubmit={e => handleSubmit(e, createUser)}
+              >
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="username">Username</InputLabel>
-                  <Input id="username" />
+                  <Input
+                    id="username"
+                    name="username"
+                    onChange={e => setName(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="email">Email</InputLabel>
-                  <Input id="email" type="email" />
+                  <Input
+                    id="email"
+                    type="email"
+                    name="email"
+                    onChange={e => setEmail(e.target.value)}
+                  />
                 </FormControl>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="password">Password</InputLabel>
-                  <Input id="password" type="password" />
+                  <Input
+                    id="password"
+                    type="password"
+                    name="password"
+                    onChange={e => setPassword(e.target.value)}
+                  />
                 </FormControl>
                 <Button
                   type="submit"
@@ -57,8 +89,7 @@ const Register = ({ classes }) => {
               </form>
             );
           }}
-        </Mutation>{' '}
-        }
+        </Mutation>
       </Paper>
     </div>
   );
