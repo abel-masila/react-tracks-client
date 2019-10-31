@@ -18,6 +18,8 @@ import Slide from '@material-ui/core/Slide';
 import Gavel from '@material-ui/icons/Gavel';
 import VerifiedUserTwoTone from '@material-ui/icons/VerifiedUserTwoTone';
 
+import Error from './../Shared/Error';
+
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
@@ -61,7 +63,7 @@ const Register = ({ classes, setNewUser }) => {
                   <Input
                     id="username"
                     name="username"
-                    autocomplete={false}
+                    autoComplete="off"
                     onChange={e => setName(e.target.value)}
                   />
                 </FormControl>
@@ -106,7 +108,7 @@ const Register = ({ classes, setNewUser }) => {
                 >
                   Previous user? Log in here
                 </Button>
-                {error && <div>Error:{error.message}</div>}
+                {error && <Error error={error} />}
               </form>
             );
           }}
@@ -121,7 +123,9 @@ const Register = ({ classes, setNewUser }) => {
           <VerifiedUserTwoTone className={classes.icon} />
           New Account
         </DialogTitle>
-        <DialogContent>Use successfully created!</DialogContent>
+        <DialogContent>
+          <DialogContentText>Use successfully created!</DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Button
             color="primary"
