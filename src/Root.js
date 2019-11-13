@@ -14,11 +14,11 @@ const Root = () => (
     {({ data, loading, error }) => {
       if (loading) return <p>loading...</p>;
       if (error) return <p>{error.message}</p>;
-
+      const currentUser = data.me;
       return (
         <Router>
           <>
-            <Header />
+            <Header currentUser={currentUser} />
             <Switch>
               <Route exact path="/" component={App} />
               <Route exact path="/profile/:id" component={Profile} />
@@ -45,6 +45,7 @@ const Root = () => (
 const GET_ME = gql`
   {
     me {
+      id
       username
       email
       lastName
