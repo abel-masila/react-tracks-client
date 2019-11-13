@@ -17,10 +17,15 @@ const Login = ({ classes, setNewUser }) => {
   const [username, setName] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e, tokenAuth) => {
+  const handleSubmit = async (e, tokenAuth, client) => {
     e.preventDefault();
     const res = await tokenAuth();
-    localStorage.setItem("jwt-tokne", res.data.tokenAuth.token);
+    localStorage.setItem("jwt-token", res.data.tokenAuth.token);
+    client.writeData({
+      data: {
+        isLoggedIn: true
+      }
+    });
   };
   return (
     <div className={classes.root}>
@@ -36,11 +41,11 @@ const Login = ({ classes, setNewUser }) => {
             password
           }}
         >
-          {(tokenAuth, { loading, error }) => {
+          {(tokenAuth, { loading, error, called, client }) => {
             return (
               <form
                 className={classes.form}
-                onSubmit={e => handleSubmit(e, tokenAuth)}
+                onSubmit={e => handleSubmit(e, tokenAuth, client)}
               >
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel htmlFor="username">Username</InputLabel>
