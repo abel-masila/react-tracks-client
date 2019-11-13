@@ -16,6 +16,14 @@ import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 
 const CreateTrack = ({ classes }) => {
   const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState("");
+
+  const handleAudioChange = event => {
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+  };
   return (
     <>
       <Button
@@ -24,7 +32,7 @@ const CreateTrack = ({ classes }) => {
         color="secondary"
         onClick={() => setOpen(true)}
       >
-        <AddIcon />
+        {open ? <ClearIcon /> : <AddIcon />}
       </Button>
 
       <Dialog className={classes.dialog} open={open}>
@@ -38,6 +46,7 @@ const CreateTrack = ({ classes }) => {
               <TextField
                 label="Title"
                 placeholder="Add Title"
+                onChange={e => setTitle(e.target.value)}
                 className={classes.textField}
               />
             </FormControl>
@@ -45,6 +54,9 @@ const CreateTrack = ({ classes }) => {
               <TextField
                 label="Description"
                 placeholder="Add Description"
+                multiline
+                rows="3"
+                onChange={e => setDescription(e.target.value)}
                 className={classes.textField}
               />
             </FormControl>
@@ -54,17 +66,21 @@ const CreateTrack = ({ classes }) => {
                 required
                 type="file"
                 className={classes.input}
+                onChange={handleAudioChange}
+                accept="audio/mp3, audio/wave"
               />
+
               <label htmlFor="audio">
                 <Button
                   variant="outlined"
                   component="span"
                   className={classes.button}
-                  color="inherit"
+                  color={file ? "secondary" : "inherit"}
                 >
                   Audio File
                   <LibraryMusicIcon className={classes.icon} />
                 </Button>
+                {file && file.name}
               </label>
             </FormControl>
           </DialogContent>
@@ -72,7 +88,11 @@ const CreateTrack = ({ classes }) => {
             <Button className={classes.cancel} onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button className={classes.save} type="submit">
+            <Button
+              className={classes.save}
+              type="submit"
+              disabled={!title.trim() || !description.trim() || !file}
+            >
               Add Track
             </Button>
           </DialogActions>
