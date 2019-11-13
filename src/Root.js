@@ -6,14 +6,15 @@ import { gql } from "apollo-boost";
 import App from "./pages/App";
 import Profile from "./pages/Profile";
 import Header from "./components/Shared/Header";
-
+import Loading from "./components/Shared/Loading";
+import Error from "./components/Shared/Error";
 import withRoot from "./withRoot";
 
 const Root = () => (
   <Query query={GET_ME}>
     {({ data, loading, error }) => {
-      if (loading) return <p>loading...</p>;
-      if (error) return <p>{error.message}</p>;
+      if (loading) return <Loading />;
+      if (error) return <Error error={error} />;
       const currentUser = data.me;
       return (
         <Router>
