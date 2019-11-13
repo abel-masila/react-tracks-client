@@ -8,6 +8,17 @@ import * as serviceWorker from "./serviceWorker";
 
 const client = new ApolloClient({
   uri: " http://127.0.0.1:8000/graphql/",
+  fetchOptions: {
+    credentials: "include"
+  },
+  request: operation => {
+    const token = localStorage.getItem("jwt-token") || "";
+    operation.setContext({
+      headers: {
+        Authorization: `JWT ${token} `
+      }
+    });
+  },
   clientState: {
     defaults: {
       isLoggedIn: !!localStorage.getItem("jwt-token")
