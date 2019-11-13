@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -15,13 +15,19 @@ import ClearIcon from "@material-ui/icons/Clear";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 
 const CreateTrack = ({ classes }) => {
+  const [open, setOpen] = useState(false);
   return (
     <>
-      <Button variant="fab" className={classes.fab} color="secondary">
+      <Button
+        variant="fab"
+        className={classes.fab}
+        color="secondary"
+        onClick={() => setOpen(true)}
+      >
         <AddIcon />
       </Button>
 
-      <Dialog className={classes.dialog} open={true}>
+      <Dialog className={classes.dialog} open={open}>
         <form>
           <DialogTitle>Create Track</DialogTitle>
           <DialogContent>
@@ -63,7 +69,9 @@ const CreateTrack = ({ classes }) => {
             </FormControl>
           </DialogContent>
           <DialogActions>
-            <Button className={classes.cancel}>Cancel</Button>
+            <Button className={classes.cancel} onClick={() => setOpen(false)}>
+              Cancel
+            </Button>
             <Button className={classes.save} type="submit">
               Add Track
             </Button>
