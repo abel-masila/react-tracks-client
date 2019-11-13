@@ -31,18 +31,6 @@ const Root = () => (
   </Query>
 );
 
-// const GET_TRACKS = gql`
-//   {
-//     tracks {
-//       id
-//       title
-//       description
-//       url
-//       createdAt
-//     }
-//   }
-// `;
-
 const GET_ME = gql`
   {
     me {
