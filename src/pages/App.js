@@ -27,7 +27,7 @@ const App = ({ classes }) => {
     </div>
   );
 };
-const GET_TRACKS = gql`
+export const GET_TRACKS = gql`
   query getTracks {
     tracks {
       id
